@@ -20,3 +20,22 @@ console.log('crypto_hash2:'+output2);
 if(output != output2) {
 	console.log('잘못된 암호입니다.');
 }
+
+//암복호와 테스트
+
+var crypto = require('crypto');
+
+var key = 'test1234!@$!!#IASYAIPSDHASF:ASKFHP';
+var input = 'PASSWORD';
+
+var cipher = crypto.createCipher('aes192', key);
+cipher.update(input, 'utf8', 'base64');
+var cipheredOutput = cipher.final('base64');
+
+var decipher = crypto.createDecipher('aes192', key);
+decipher.update(cipheredOutput, 'base64', 'utf8');
+var decipheredOutput = decipher.final('utf8');
+
+console.log('pw: ' + input);
+console.log('cipher pw ' + cipheredOutput);
+console.log('decipher pw: ' + decipheredOutput);

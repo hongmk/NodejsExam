@@ -26,7 +26,7 @@ if(output != output2) {
 var crypto = require('crypto');
 
 var key = 'test1234!@$!!#IASYAIPSDHASF:ASKFHP';
-var input = 'PASSWORD';
+var input = 'test1234!@$!!#';
 
 var cipher = crypto.createCipher('aes192', key);
 cipher.update(input, 'utf8', 'base64');
@@ -39,3 +39,30 @@ var decipheredOutput = decipher.final('utf8');
 console.log('pw: ' + input);
 console.log('cipher pw ' + cipheredOutput);
 console.log('decipher pw: ' + decipheredOutput);
+
+
+//파일입출력 
+
+var fs = require('fs');
+
+var data = {pw:pw, output:output, cipheredOutput:cipheredOutput};
+
+fs.writeFile('pw.txt', JSON.stringify(data), 'utf8', function(err){
+	if(err){
+		console.log(err);
+	} else{
+		console.log('write completed...');
+		fs.readFile('pw.txt', 'utf8', function(err,data){
+			if(err) {
+				console.log(err);
+			} else {
+				console.log('data='+data);
+			}
+		});
+
+	}
+});
+
+
+
+

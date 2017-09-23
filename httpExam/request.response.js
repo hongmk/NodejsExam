@@ -21,6 +21,7 @@ http.createServer(function(req, res){
 			res.end('<h1>'+data+'<h1>');
 		});
 	}
+	//console.log(req.headers);
 
 }).listen(52273, function(){
 	console.log('Server running...');

@@ -27,3 +27,9 @@ for (var i = 1; i <= 10; i++) {
 console.log('Result:', output);
 
 console.timeEnd('alpha');
+
+//exports 사용법
+var module = require('./module.js');
+
+console.log("num:"+module.abs(-10000));
+console.log("rad:"+module.circleArea(3));

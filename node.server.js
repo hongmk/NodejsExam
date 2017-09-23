@@ -1,3 +1,5 @@
+//node node.server.js 실행 후 브라우저에서 접속확인
+
 var http = require('http');
 
 http.createServer(function (request, response) {

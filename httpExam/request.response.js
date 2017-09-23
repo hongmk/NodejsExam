@@ -2,17 +2,38 @@
 
 var http = require('http');
 var fs = require('fs');
+var ejs = require('ejs');
+
 http.createServer(function(req, res){
 	if(req.method == 'GET'){
 		console.log(req.url+" GET");
-		fs.readFile('index.html', function(err, data) {
-			if(!err) {
-				res.writeHead(200, {'Content-Type':'text/html'});
-				res.end(data);
-			} else {
-				res.wrtieHead(404);
-			}
-		});
+		//ejs 수행로직 추가
+		if(req.url == '/'){
+			fs.readFile('index.html', function(err, data) {
+				if(!err) {
+					res.writeHead(200, {'Content-Type':'text/html'});
+					res.end(data);
+				} else {
+					res.wrtieHead(404);
+				}
+			});
+		} else if(req.url == '/ejs') {
+			fs.readFile('template.ejs', 'utf8', function(err, data) {
+				if(!err) {
+					var html = ejs.render(data, {
+						name: 'Hello',
+						description: 'Hello ejs With Node.js'
+					});
+
+					res.writeHead(200, {'Content-Type':'text/html'});
+					res.end(html);
+
+				} else {
+					res.wrtieHead(404);
+				}
+			});
+		}
+
 
 	} else if(req.method == 'POST') {
 		console.log(req.url+" POST");
